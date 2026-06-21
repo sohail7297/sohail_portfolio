@@ -440,10 +440,48 @@ body.light-theme .project-tag {
     letter-spacing: -1px;
 }
 
-.contact-sidebar p {
+.contact-desc {
     color: var(--text-secondary);
     font-size: 1.05rem;
+    margin-bottom: 32px !important;
+}
+
+/* BRAND ICON BUTTONS WRAPPER */
+.contact-channels {
+    display: flex;
+    gap: 12px;
     margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.channel-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+body.light-theme .channel-icon-btn {
+    background: rgba(15, 23, 42, 0.03);
+}
+
+.channel-icon-btn i {
+    font-size: 1.2rem; /* Adjusted for Font Awesome icon layouts */
+}
+
+.channel-icon-btn:hover {
+    color: #ffffff;
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
 .contact-methods {
@@ -463,20 +501,6 @@ body.light-theme .project-tag {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--text-secondary);
-}
-
-.method-link {
-    font-size: 1.25rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: 500;
-    display: inline-block;
-    transition: color 0.2s, transform 0.2s;
-}
-
-.method-link:hover {
-    color: var(--accent);
-    transform: translateX(4px);
 }
 
 .method-text {
@@ -539,8 +563,21 @@ body.light-theme .contact-form-container {
 /* --- Footer Elements --- */
 footer { padding: 60px 0; font-size: 0.9rem; color: var(--text-secondary); border-top: 1px solid var(--border-color); }
 .footer-content { display: flex; justify-content: space-between; align-items: center; }
-.footer-links a { color: var(--text-secondary); text-decoration: none; margin-left: 28px; transition: color 0.2s; }
-.footer-links a:hover { color: var(--text-primary); }
+
+.footer-links-icons {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-links-icons a {
+    color: var(--text-secondary);
+    transition: color 0.2s;
+    font-size: 1.1rem;
+}
+
+.footer-links-icons a:hover {
+    color: var(--text-primary);
+}
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
@@ -555,5 +592,4 @@ footer { padding: 60px 0; font-size: 0.9rem; color: var(--text-secondary); borde
     .project-card { padding: 36px; }
     .timeline-item { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
     .footer-content { flex-direction: column; gap: 20px; text-align: center; }
-    .footer-links a { margin: 0 14px; }
 }

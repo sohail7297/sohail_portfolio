@@ -23,17 +23,14 @@ themeToggleBtn.addEventListener('click', () => {
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // 1. Change your Formspree ID here
-    // You can put just the ID (e.g., "xaaaaaa") or the full URL
+    // Replace with your actual Formspree ID or URL link
     const formspreeEndpoint = "https://formspree.io/f/mkolwvjn"; 
     
     const submitButton = contactForm.querySelector('.btn-submit');
     const originalButtonText = submitButton.innerText;
     
-    // Get form data
     const formData = new FormData(contactForm);
     
-    // Visual feedback: Update button state to loading
     submitButton.innerText = "Sending...";
     submitButton.disabled = true;
 
@@ -47,13 +44,11 @@ contactForm.addEventListener('submit', async (e) => {
         });
 
         if (response.ok) {
-            // Success State UI transformation
             submitButton.innerText = "Message Sent ✓";
-            submitButton.style.backgroundColor = "#10b981"; // Success Green
+            submitButton.style.backgroundColor = "#10b981"; 
             submitButton.style.color = "#ffffff";
             contactForm.reset();
             
-            // Reset button back to normal after 4 seconds
             setTimeout(() => {
                 submitButton.innerText = originalButtonText;
                 submitButton.style.backgroundColor = "";
@@ -62,7 +57,6 @@ contactForm.addEventListener('submit', async (e) => {
             }, 4000);
 
         } else {
-            // Server error handling
             const errorData = await response.json();
             throw new Error(errorData.error || "Form submission failed.");
         }
@@ -70,9 +64,8 @@ contactForm.addEventListener('submit', async (e) => {
     } catch (error) {
         console.error("Formspree Error:", error);
         
-        // Error State UI feedback
         submitButton.innerText = "Error! Try Again";
-        submitButton.style.backgroundColor = "#ef4444"; // Error Red
+        submitButton.style.backgroundColor = "#ef4444"; 
         submitButton.style.color = "#ffffff";
         submitButton.disabled = false;
         
