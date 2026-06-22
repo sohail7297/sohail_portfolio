@@ -40,6 +40,13 @@ body.light-theme {
     scroll-behavior: smooth;
 }
 
+/* Hide standard cursor safely on non-touch screens */
+@media (min-width: 769px) {
+    html, body, a, button, input, textarea, select, i {
+        cursor: none !important;
+    }
+}
+
 body {
     background-color: var(--bg-main);
     color: var(--text-primary);
@@ -49,6 +56,68 @@ body {
     position: relative;
     overflow-x: hidden;
     transition: background-color 0.3s, color 0.3s;
+}
+
+/* ====== ADVANCED CURSOR DESIGN SYSTEM ====== */
+.custom-crosshair {
+    position: fixed;
+    width: 14px;
+    height: 14px;
+    pointer-events: none; /* Allows direct pointer clicking pass-through */
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    display: block;
+    opacity: 0; /* Hidden initially, made visible instantly by JavaScript mousemove */
+    transition: opacity 0.2s ease;
+}
+
+.custom-crosshair::before,
+.custom-crosshair::after {
+    content: '';
+    position: absolute;
+    background-color: var(--accent);
+    transition: background-color 0.3s;
+}
+.custom-crosshair::before { top: 6px; left: 0; width: 14px; height: 2px; }
+.custom-crosshair::after { top: 0; left: 6px; width: 2px; height: 14px; }
+
+.custom-target-box {
+    position: fixed;
+    width: 34px;
+    height: 34px;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    display: block;
+    opacity: 0;
+    animation: slowSpin 12s linear infinite;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, transform 0.05s ease-out;
+}
+
+@keyframes slowSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+.bracket {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1.5px solid var(--accent);
+    transition: border-color 0.3s;
+}
+.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.custom-target-box.cursor-hover {
+    width: 54px;
+    height: 54px;
+    animation: fastSpin 1.5s linear infinite;
+}
+
+@keyframes fastSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+@media (max-width: 768px) {
+    .custom-crosshair, .custom-target-box { display: none !important; }
 }
 
 /* --- Ambient Background Glow Shapes --- */
@@ -148,7 +217,6 @@ body.light-theme nav a:hover {
     background-color: rgba(15, 23, 42, 0.03);
 }
 
-/* --- Theme Toggle Switch Button --- */
 .theme-toggle-btn {
     background: transparent;
     border: none;
@@ -167,7 +235,6 @@ body.light-theme nav a:hover {
 .theme-toggle-btn:hover {
     color: var(--text-primary);
     background-color: rgba(255, 255, 255, 0.03);
-    transform: rotate(15deg);
 }
 
 body.light-theme .theme-toggle-btn:hover {
@@ -248,7 +315,6 @@ h1 {
     font-weight: 600;
     text-decoration: none;
     border: none;
-    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -277,14 +343,13 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* Subtle icon spacing tweak for download button layout */
 .btn-download i {
     font-size: 0.9rem;
     transition: transform 0.2s ease;
 }
 
 .btn-download:hover i {
-    transform: translateY(2px); /* Animated slide down on button hover */
+    transform: translateY(2px); 
 }
 
 /* --- Layout Sections --- */
